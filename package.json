@@ -1,20 +1,53 @@
 {
-  "name": "intranet-desktop",
+  "author": {
+    "name": "Seu nome",
+    "email": "seu-email@email.com",
+    "url": "https://seu-site.com"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.seu-site.seu-app",
+    "productName": "App name",
+    "copyright": "Copyright © 2019 Seu nome",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "name": "project-name",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "electron-is-dev": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
+  },
+  "devDependencies": {
+    "@rescripts/cli": "0.0.14",
+    "@rescripts/rescript-env": "0.0.12",
+    "concurrently": "^5.2.0",
+    "electron": "^9.1.0",
+    "electron-builder": "^22.7.0",
+    "typescript": "^3.9.6",
+    "wait-on": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-electron": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron public/electron.js\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-build": "npm build",
+    "electron-build": "electron-builder -w"
   },
   "eslintConfig": {
     "extends": "react-app"
